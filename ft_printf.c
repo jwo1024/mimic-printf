@@ -1,138 +1,299 @@
-//#include	"ft_printf.h"
-#include	<stdarg.h>
-#include	<stdlib.h>
+#include    "ft_printf.h"
+/*
+#include    <stdarg.h>
+#include	<stdio.h>
 
-typedef struct hello 
+int ft_printf(const char *c, ...);
+
+char    *ft_conv_dec(size_t n, size_t to);
+int     ft_prtf_justr(const char **cptr);
+int     ft_prtf_form(const char **cptr, va_list *ap);
+int     ft_form(char c, va_list *ap, char **nbr);
+int     ft_form_c(va_list *ap, char **str, char c);
+int     ft_form_s(va_list *ap, char **str);
+int     ft_form_di(va_list *ap, char **str);
+int     ft_form_p(va_list *ap, char **str);
+int     ft_form_u(va_list *ap, char **str);
+int     ft_form_xX(va_list *ap, char **str, char c);
+*/
+/*
+int main(void)
 {
-	int	c_flg;
-	int	s_flg;
-} hi;
+    int i = -392;
+	int	k = 99;
+	char c = 'a';
+	char *a = "9!";
+	int	rtn;
 
-int		ft_prnf_cal(const char **cptr, char *str, va_list ap);
+    rtn = ft_printf("123\n%x\n%u\n%i\n", i, i, i);
+	printf("rtn = %d\n", rtn);
+    return (0);
+}
+*/
+// 자료형 - 서식문자 합 맞는지 확인 필요 ? 어떻게? 
 
-static int		ft_justr(const char **cptr, char *str);
-static int      ft_isspc(char c, char str, va_list ap); // cal 에서 static 처리
-
-int	ft_printf(const char *c, ...)
+int ft_printf(const char *c, ...)
 {
-	char		*str;
-	va_list		ap;
-	int			flag; //필요한가?
-	int			rtn;
+	va_list ap;
+	int len;
+	int rtn;
 
-	flag = 1;
 	va_start(ap, c);
-	
-	while (*c)
+	len = 1;
+    rtn = 0;
+	while(*c != '\0') // c는 함수 파라미터로 포인터 주소를 넣어 돌려준다.(&c)
 	{
-		if (*c == '\0' && flag == 0)
-			break;
-		else if (*c == '%')
+		if (*c == '%')
 		{
-			flag = ft_percent(&c, str, ap); //?? ap 전달 가능 한가? ㅇㅇ ap = 포인터
+			len = ft_prtf_form(&c, &ap);
 		}
-		else
-			flag = ft_justr(&c, str);
+		else // 일반 문자열일때
+			len = ft_prtf_justr(&c);
+		if (len == -1) // 실패시 -1
+		{
+			rtn = len;
+			break;
+		}
+		rtn += len;
 	}
 	va_end(ap);
-	ft_putstr_fd(str, 1);
-	rtn = ft_strlen(str);
-	free(str);
 	return(rtn);
 }
 
-static int	ft_justr(const char **cptr, char *str)
+
+int ft_prtf_justr(const char **cptr) //일반 문자열 일때
 {
-	size_t	len;
-	char	*tmp;
-	char	*tmp2;
+	int     len;
 
 	len = 0;
-	while (**cptr != '%' && **cptr != '\0')
+	while((*cptr)[len] != '\0' && (*cptr)[len] != '%')
+	{
+		ft_putchar_fd((*cptr)[len], 1);
 		len++;
-	tmp = ft_substr(*cptr, 0, len);
-	tmp2 = str;
-	//realloc str?;
-	str = ft_strjoin(str, tmp); // str, str 겹침 문제
-	free(tmp);
-	free(tmp2);
+	}
 	*cptr += len;
-	return (1);
+	return (len);
 }
 
-int		ft_cal(const char **cptr, char *str, va_list ap)
-{
-	char	*nbr;
-	int		idx;
 
-	idx = 0;
-	*cptr++;
-	if (**cptr == '%'|| ft_isspc_c()) // isspcc_c,, c, s 일경우 str 에 문자열 그대로 더하기
-		return ;// %출력 str 에 더하기
-	else
+int ft_prtf_form(const char **cptr, va_list *ap) //%일때
+{
+	int i;
+	int rtn;
+	char	a;
+	char *str; //더블포인터로 설정 해야하나?? 어떻게 하지
+	
+	i = 0;
+	rtn = 0;
+
+	(*cptr)++;
+	while(1) //서식문자 찾기
 	{
-		while (*cptr[idx] != '%')
+		a = (*cptr)[i];
+		i++;
+		rtn = ft_form(a, ap, &str);
+		if(rtn == 1)
+			break;
+		else if(a == '\0' || rtn == -1)
 		{
-			if (ft_isspc_n(*cptr[idx], nbr, ap))
-				break;
-			
-			idx++;
+			rtn = -1; //서식문자를 찾지 못하면 잘못된입력 // 플래그 몇개 이상이면, 
+			break;
 		}
 	}
-	// str 에 nbr 더하기 join
-	
 
-	*cptr += idx;
-	return (1); //?
+/*
+	if(i > 1 && rtn != -1) //i 가 1보다 크다면 플래그가 존재한다는 뜻
+	{
+		//while // 서식문자 flag에 맞게 편집
+		// 플래그에 맞게 nbr 을 편집하여 새로운 nbr을 만들음
+	}
+*/
+
+// print str
+	if(str != NULL || rtn != -1)
+	{
+		rtn = ft_strlen(str);
+		ft_putstr_fd(str, 1);
+		free(str);
+	}
+	*cptr += i;
+	return (rtn); // 연결부분 수정필요 길이를 반환하던지 그래야함
 }
 
-static int      ft_isspc_n(char c, char *nbr, va_list ap) // 문자랑 숫자랑 분리하기 isspcc c,s/ isspcn 나머지
+
+int ft_form(char c, va_list *ap, char **nbr)
 {
-	if (c == 'p')
-		ft_prnf_p();
-	else if (c == 'd')
-		ft_prnf_d();
-	else if (c == 'l')
-		ft_prnf_l();
+	int rtn;
+
+	rtn = 0;
+	if (c == '%'|| c == 'c')
+		rtn = ft_form_c(ap, nbr, c);
+	else if (c == 's')
+		rtn = ft_form_s(ap, nbr);
+	else if (c == 'd' || c == 'i')
+		rtn = ft_form_di(ap, nbr);
+	else if (c == 'p')
+		rtn = ft_form_p(ap, nbr);
 	else if (c == 'u')
-		ft_prnf_u();
-	else if (c == 'x')
-		ft_prnf_x();
-	else if (c == 'X')
-		ft_prnf_X();
+		rtn = ft_form_u(ap, nbr);
+	else if (c == 'x' || c == 'X')
+		rtn = ft_form_xX(ap, nbr, c);
+	return (rtn);
+}
+
+
+int ft_form_c(va_list *ap, char **str, char c) //'\0' 출력하도록
+{
+	*str = (char *)malloc(sizeof(char) * 2);
+	if(*str)
+	{
+		if (c == '%')
+			(*str)[0] = '%';
+		else if (c == 'c')
+			(*str)[0] = va_arg(*ap, int);// char 은 int 로 접근 // 사유 찾기
+        (*str)[1] = '\0';
+	    return (1);
+	}
+	return (0);
+}
+
+
+int ft_form_s(va_list *ap, char **str)
+{
+	char *s;
+	
+	s = va_arg(*ap, char *);
+	if (s)
+	{
+		*str = ft_substr(s, 0, ft_strlen(s) + 1);
+		if (*str)
+			return (1);
+	}
+	
+	return (-1);
+}
+
+
+int ft_form_di(va_list *ap, char **str)
+{
+	int		n;
+	char	*tmp;
+
+	n = va_arg(*ap, int);
+	if (n < 0)
+	{
+		if(n == -2147483648)
+			*str = ft_substr("-2147483648", 0, 12);
+		else
+		{
+			n *= -1;
+			tmp = ft_conv_dec(n, 10);
+			*str = ft_strjoin("-", tmp);
+			free(tmp);
+		}
+	}
 	else
-		return (0);
-	// if else 문에서 ap 내용물을 문자열로 nbr에 할당
-	// ?? 뭐하려 했지
-		//tick tok tick tok ... mango mango ~   
+		*str = ft_conv_dec(n, 10);
+	if (*str == NULL)
+		return(0);
 	return (1);
 }
 
-void	ft_prnf_c(char *nbr, va_list ap)
-{
-	char c;
 
-	c = va_arg(ap, char);
-	nbr = ft_calloc(2);
-	nbr[0] = c;
+int ft_form_p(va_list *ap, char **str) //16진수 다루는 p, x, X 합칠수? 안될듯
+{
+	size_t n; //주소는 양수만
+	void *p;
+	char *tmp;	
+
+	p = va_arg(*ap, void *);
+	n = (size_t)p;
+	tmp = ft_conv_dec(n, 16); //n을 16진수로 변환
+	// 앞에 0x 달아주기,,
+	*str = ft_strjoin("0x", tmp);
+	free(tmp); //어디서 free 해야하지
+	if (str == NULL)
+		return (0);
+	return (1);
 }
 
-void	ft_prnf_s()
+
+int ft_form_u(va_list *ap, char **str)
 {
+	unsigned int n;
+
+	n = va_arg(*ap, unsigned int);
+	*str = ft_conv_dec(n, 10); // unsigned int -> size_t ??
+	if (*str == NULL)
+		return(0);
+	return (1);
+}
+
+
+int ft_form_xX(va_list *ap, char **str, char c) //자리수 8개 맞추기 X일경우 확인
+{
+	size_t	n; //x, X는 부호 없는 16진법 정수
+	char	*tmp;
+	size_t	rtn;
+
+	rtn = 0;
+	n = (size_t)va_arg(*ap, size_t); //size_t로 읽는게 맞나
+	tmp = ft_conv_dec(n, 16);
+	if (tmp)
+	{
+		if (ft_strlen(tmp) > 8)
+		{
+			*str = ft_substr(tmp, ft_strlen(tmp) - 8, ft_strlen(tmp) + 1);
+			free(tmp);
+		}
+		else
+			*str = tmp;
+		if (c == 'X')
+		{
+			n = 0;
+			while((*str)[n])
+			{
+				(*str)[n] = ft_toupper((*str)[n]);
+				n++;
+			}
+		}
+		if (*str)
+			rtn = 1;
+	}
+	return(rtn);
+}
+
+//			*str = ft_strjoin("", tmp);  //0x
+// ok;
+
+char    *ft_conv_dec(size_t n, size_t to) // oct 수정! -> dec // ft_dectoa();
+{
+    size_t a; //tmp 이름 바꾸기
+	size_t l;
+	char idx[20];
+	char *nbr;
 	
+	ft_strlcpy(idx, "0123456789abcdef", 20); //20 조절 
+	l = 0;
+	a = n;
+	while (a)
+	{
+		a = a / to;
+		l++;
+	}
+	if (n == 0)
+		l++;
+	nbr = (char *)malloc(sizeof(char) * (l + 1));
+	if (nbr)
+	{
+		a = 0;
+		while(a < l)
+		{
+			nbr[l - a - 1] = idx[n % to];
+			n = n / to;
+			a++;
+		}
+	}
+	nbr[a] = '\0';
+	return (nbr);
 }
-
-//	while (/*c 처음부터 끝까지 */ 1)
-//	{
-		/* if (just_str(char *str, c의 위치))
-			while (*c != '%' || *c != '\0')
-				c++; */
-		/* str_with_percent(char *str, c의 위치) */
-
-//	}
-	//find str and print str
-		//검사 및 프린트할 str(malloc) 할당 후 
-		//프린트할 str이 있을 경우 print and free str
-		//없을 경우 그냥 지나감;
-	//find % percent point to specifier서식문자
-		//그 후는 무조건 % or \0
