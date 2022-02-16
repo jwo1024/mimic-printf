@@ -5,7 +5,6 @@
 # include    <stdarg.h>
 
 int		ft_printf(const char *c, ...);
-
 char	*ft_conv_dec(size_t n, size_t to);
 int		ft_prtf_justr(const char **cptr);
 int		ft_prtf_form(const char **cptr, va_list *ap);
