@@ -12,7 +12,10 @@ ARFLAGS = crs
 
 HEADER = ft_printf.h
 
-SRCS = ft_printf.c
+SRCS = ft_printf.c \
+		ft_form_1.c \
+		ft_form_2.c \
+		ft_conv_dec.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -38,6 +41,5 @@ re : fclean all
 
 $(NAME) : $(LIB_O) $(OBJS)
 	$(AR) $(ARFLAGS) $@ $(OBJS) $(LIB_O)
-
 
 .PHONY : all clean fclean re
