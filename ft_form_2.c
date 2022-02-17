@@ -6,7 +6,7 @@
 /*   By: jiwolee <jiwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 17:39:11 by jiwolee           #+#    #+#             */
-/*   Updated: 2022/02/17 20:00:49 by jiwolee          ###   ########seoul.kr  */
+/*   Updated: 2022/02/17 20:12:25 by jiwolee          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ static void	xX_rm_zero(char **str)
 {
 	char	*tmp;
 	int		tmp_len;
+	int		n;
 
 	tmp = *str;
 	tmp_len = ft_strlen(tmp);
@@ -78,7 +79,7 @@ static void	xX_rm_zero(char **str)
 	}
 	else
 	{
-		int n = 0;
+		n = 0;
 		while ((*str)[n] == '0')
 			n++;
 		tmp = *str;
