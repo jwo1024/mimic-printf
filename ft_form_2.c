@@ -1,6 +1,6 @@
 #include	"ft_printf.h"
 
-int ft_form_p(va_list *ap, char **str)
+int	ft_form_p(va_list *ap, char **str)
 {
 	size_t	n;
 	void	*p;
@@ -9,7 +9,7 @@ int ft_form_p(va_list *ap, char **str)
 	p = va_arg(*ap, void *);
 	n = (size_t)p;
 	tmp = ft_conv_dec(n, 16);
-	if(tmp)
+	if (tmp)
 	{
 		*str = ft_strjoin("0x", tmp);
 		free(tmp);
@@ -26,11 +26,11 @@ int ft_form_u(va_list *ap, char **str)
 	n = va_arg(*ap, unsigned int);
 	*str = ft_conv_dec(n, 10);
 	if (*str == NULL)
-		return(0);
+		return (0);
 	return (1);
 }
 
-int ft_form_xX(va_list *ap, char **str, char c)
+int	ft_form_xX(va_list *ap, char **str, char c)
 {
 	char	*tmp;
 	int		tmp_len;

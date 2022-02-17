@@ -1,6 +1,6 @@
 #include    "ft_printf.h"
 
-int ft_form_c(va_list *ap, char **str, char c)
+int	ft_form_c(va_list *ap, char **str, char c)
 {
 	*str = (char *)malloc(sizeof(char) * 2);
 	if (*str)
@@ -8,14 +8,14 @@ int ft_form_c(va_list *ap, char **str, char c)
 		if (c == '%')
 			(*str)[0] = '%';
 		else if (c == 'c')
-			(*str)[0] = va_arg(*ap, int);// char 은 int 로 접근 // 사유 찾기
-        (*str)[1] = '\0';
-	    return (1);
+			(*str)[0] = va_arg(*ap, int);
+		(*str)[1] = '\0';
+		return (1);
 	}
 	return (0);
 }
 
-int ft_form_s(va_list *ap, char **str)
+int	ft_form_s(va_list *ap, char **str)
 {
 	char	*s;
 
@@ -29,7 +29,7 @@ int ft_form_s(va_list *ap, char **str)
 	return (0);
 }
 
-int ft_form_di(va_list *ap, char **str)
+int	ft_form_di(va_list *ap, char **str)
 {
 	int		n;
 	char	*tmp;
@@ -50,6 +50,6 @@ int ft_form_di(va_list *ap, char **str)
 	else
 		*str = ft_conv_dec(n, 10);
 	if (*str == NULL)
-		return(0);
+		return (0);
 	return (1);
 }

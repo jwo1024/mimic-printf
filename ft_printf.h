@@ -1,5 +1,5 @@
-#ifndef PRINTF_H
-# define PRINTF_H
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
 # include    "./libft/libft.h"
 # include    <stdarg.h>
@@ -17,6 +17,5 @@ int		ft_form_p(va_list *ap, char **str);
 int		ft_form_u(va_list *ap, char **str);
 int		ft_form_xX(va_list *ap, char **str, char c);
 void	ft_form_X(char **str);
-
 
 #endif

@@ -8,7 +8,7 @@ int	ft_printf(const char *c, ...)
 
 	va_start(ap, c);
 	len = 1;
-    rtn = 0;
+	rtn = 0;
 	while (*c != '\0')
 	{
 		if (*c == '%')
@@ -18,7 +18,7 @@ int	ft_printf(const char *c, ...)
 		if (len == -1)
 		{
 			rtn = len;
-			break;
+			break ;
 		}
 		rtn += len;
 	}
@@ -26,7 +26,7 @@ int	ft_printf(const char *c, ...)
 	return (rtn);
 }
 
-int ft_prtf_justr(const char **cptr)
+int	ft_prtf_justr(const char **cptr)
 {
 	int	len;
 
@@ -56,20 +56,20 @@ int	ft_prtf_form(const char **cptr, va_list *ap)
 		i++;
 		rtn = ft_form(a, ap, &str);
 		if (rtn == 1)
-			break;
-		else if(a == '\0' || rtn == -1)
+			break ;
+		else if (a == '\0' || rtn == -1)
 		{
 			rtn = -1;
-			break;
+			break ;
 		}
 	}
 	if (rtn != -1)
 		rtn = ft_wrtfre_str(**cptr, str);
 	*cptr += i;
-	return (rtn); // 연결부분 수정필요 길이를 반환하던지 그래야함
+	return (rtn);
 }
 
-int	ft_wrtfre_str(char	c, char *str) //str malloc free 위치; 
+int	ft_wrtfre_str(char	c, char *str)
 {
 	int	rtn;
 
@@ -90,12 +90,12 @@ int	ft_wrtfre_str(char	c, char *str) //str malloc free 위치;
 	return (rtn);
 }
 
-int ft_form(char c, va_list *ap, char **nbr)
+int	ft_form(char c, va_list *ap, char **nbr)
 {
 	int	rtn;
 
 	rtn = 0;
-	if (c == '%'|| c == 'c')
+	if (c == '%' || c == 'c')
 		rtn = ft_form_c(ap, nbr, c);
 	else if (c == 's')
 		rtn = ft_form_s(ap, nbr);
