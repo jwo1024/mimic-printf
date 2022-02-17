@@ -19,7 +19,7 @@ int	ft_form_p(va_list *ap, char **str)
 	return (1);
 }
 
-int ft_form_u(va_list *ap, char **str)
+int	ft_form_u(va_list *ap, char **str)
 {
 	unsigned int	n;
 
@@ -45,9 +45,8 @@ int	ft_form_xX(va_list *ap, char **str, char c)
 			free(tmp);
 			if (ft_strncmp(*str, "00000000", 8) == 0)
 			{
-				tmp = *str;
-				*str = ft_substr("0", 0, 2); 
-				free(tmp);
+				free(*str);
+				*str = ft_substr("0", 0, 2);
 			}
 		}
 		else
