@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: jiwolee <jiwolee@student.42seoul.kr>       +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/02/17 17:39:05 by jiwolee           #+#    #+#              #
+#    Updated: 2022/02/17 18:28:45 by jiwolee          ###   ########seoul.kr   #
+#                                                                              #
+# **************************************************************************** #
+
 NAME	= libftprintf.a
 
 LIB_DIR	= ./libft/
@@ -8,7 +20,7 @@ CC		= gcc
 CFLAG	= -Wall -Wextra -Werror
 
 AR		= ar
-ARFLAGS = crs
+ARFLAGS = rus
 
 HEADER = ft_printf.h
 
@@ -39,7 +51,8 @@ fclean : clean
 
 re : fclean all
 
-$(NAME) : $(LIB_O) $(OBJS)
-	$(AR) $(ARFLAGS) $@ $(OBJS) $(LIB_O)
+$(NAME) : $(LIB) $(OBJS)
+	cp $(LIB) $@
+	$(AR) $(ARFLAGS) $@ $(OBJS)
 
 .PHONY : all clean fclean re
