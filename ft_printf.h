@@ -6,7 +6,7 @@
 /*   By: jiwolee <jiwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 17:39:00 by jiwolee           #+#    #+#             */
-/*   Updated: 2022/02/17 17:39:01 by jiwolee          ###   ########seoul.kr  */
+/*   Updated: 2022/02/17 20:00:03 by jiwolee          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,5 @@ int		ft_form_di(va_list *ap, char **str);
 int		ft_form_p(va_list *ap, char **str);
 int		ft_form_u(va_list *ap, char **str);
 int		ft_form_xX(va_list *ap, char **str, char c);
-void	ft_form_X(char **str);
 
 #endif

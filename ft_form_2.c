@@ -6,11 +6,14 @@
 /*   By: jiwolee <jiwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 17:39:11 by jiwolee           #+#    #+#             */
-/*   Updated: 2022/02/17 17:39:12 by jiwolee          ###   ########seoul.kr  */
+/*   Updated: 2022/02/17 20:00:49 by jiwolee          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"ft_printf.h"
+
+static void	xX_rm_zero(char **str);
+static void	xX_strupper(char **str);
 
 int	ft_form_p(va_list *ap, char **str)
 {
@@ -44,34 +47,47 @@ int	ft_form_u(va_list *ap, char **str)
 
 int	ft_form_xX(va_list *ap, char **str, char c)
 {
+	int	str_len;
+
+	*str = ft_conv_dec((size_t)va_arg(*ap, size_t), 16);
+	if (*str)
+	{
+		str_len = ft_strlen(*str);
+		if (str_len > 8)
+			xX_rm_zero(str);
+		if (c == 'X')
+			xX_strupper(str);
+		return (1);
+	}	
+	return (0);
+}
+
+static void	xX_rm_zero(char **str)
+{
 	char	*tmp;
 	int		tmp_len;
 
-	tmp = ft_conv_dec((size_t)va_arg(*ap, size_t), 16);
-	if (tmp)
+	tmp = *str;
+	tmp_len = ft_strlen(tmp);
+	*str = ft_substr(tmp, tmp_len - 8, tmp_len + 1);
+	free(tmp);
+	if (ft_strncmp(*str, "00000000", 8) == 0)
 	{
-		tmp_len = ft_strlen(tmp);
-		if (tmp_len > 8)
-		{
-			*str = ft_substr(tmp, tmp_len - 8, tmp_len + 1);
-			free(tmp);
-			if (ft_strncmp(*str, "00000000", 8) == 0)
-			{
-				free(*str);
-				*str = ft_substr("0", 0, 2);
-			}
-		}
-		else
-			*str = tmp;
+		free(*str);
+		*str = ft_substr("0", 0, 2);
 	}
-	if (!*str)
-		return (0);
-	if (c == 'X')
-		ft_form_X(str);
-	return (1);
+	else
+	{
+		int n = 0;
+		while ((*str)[n] == '0')
+			n++;
+		tmp = *str;
+		*str = ft_substr(tmp, n, ft_strlen(tmp));
+		free(tmp);
+	}
 }
 
-void	ft_form_X(char **str)
+static void	xX_strupper(char **str)
 {
 	size_t	n;
 
