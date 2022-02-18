@@ -6,7 +6,7 @@
 /*   By: jiwolee <jiwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 17:39:11 by jiwolee           #+#    #+#             */
-/*   Updated: 2022/02/17 20:12:25 by jiwolee          ###   ########seoul.kr  */
+/*   Updated: 2022/02/17 23:05:44 by jiwolee          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,9 @@ static void	xX_strupper(char **str);
 
 int	ft_form_p(va_list *ap, char **str)
 {
-	size_t	n;
-	void	*p;
 	char	*tmp;	
 
-	p = va_arg(*ap, void *);
-	n = (size_t)p;
-	tmp = ft_conv_dec(n, 16);
+	tmp = ft_conv_dec((size_t)va_arg(*ap, void *), 16);
 	if (tmp)
 	{
 		*str = ft_strjoin("0x", tmp);
@@ -36,10 +32,7 @@ int	ft_form_p(va_list *ap, char **str)
 
 int	ft_form_u(va_list *ap, char **str)
 {
-	unsigned int	n;
-
-	n = va_arg(*ap, unsigned int);
-	*str = ft_conv_dec(n, 10);
+	*str = ft_conv_dec((size_t)va_arg(*ap, unsigned int), 10);
 	if (*str == NULL)
 		return (0);
 	return (1);
@@ -49,7 +42,7 @@ int	ft_form_xX(va_list *ap, char **str, char c)
 {
 	int	str_len;
 
-	*str = ft_conv_dec((size_t)va_arg(*ap, size_t), 16);
+	*str = ft_conv_dec((size_t)va_arg(*ap, unsigned int), 16);
 	if (*str)
 	{
 		str_len = ft_strlen(*str);
@@ -90,7 +83,7 @@ static void	xX_rm_zero(char **str)
 
 static void	xX_strupper(char **str)
 {
-	size_t	n;
+	int	n;
 
 	n = 0;
 	while ((*str)[n])

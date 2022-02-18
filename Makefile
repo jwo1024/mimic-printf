@@ -6,7 +6,7 @@
 #    By: jiwolee <jiwolee@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/17 17:39:05 by jiwolee           #+#    #+#              #
-#    Updated: 2022/02/17 18:28:45 by jiwolee          ###   ########seoul.kr   #
+#    Updated: 2022/02/17 21:57:04 by jiwolee          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,8 +51,10 @@ fclean : clean
 
 re : fclean all
 
+bonus : all
+
 $(NAME) : $(LIB) $(OBJS)
 	cp $(LIB) $@
 	$(AR) $(ARFLAGS) $@ $(OBJS)
 
-.PHONY : all clean fclean re
+.PHONY : all clean fclean re bonus
