@@ -6,7 +6,7 @@
 /*   By: jiwolee <jiwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 21:59:06 by jiwolee           #+#    #+#             */
-/*   Updated: 2022/01/22 01:57:19 by jiwolee          ###   ########.fr       */
+/*   Updated: 2022/02/23 15:56:58 by jiwolee          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_putnbr_fd(int n, int fd)
 		write(fd, "-2147483648", 11);
 	else
 	{
-		 if (n < 0)
+		if (n < 0)
 		{
 			write(fd, "-", 1);
 			n = n * -1;

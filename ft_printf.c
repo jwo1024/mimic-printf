@@ -6,7 +6,7 @@
 /*   By: jiwolee <jiwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 17:39:11 by jiwolee           #+#    #+#             */
-/*   Updated: 2022/02/23 15:52:45 by jiwolee          ###   ########seoul.kr  */
+/*   Updated: 2022/02/23 17:32:32 by jiwolee          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,25 +52,19 @@ int	prtf_justr(const char **cptr)
 
 int	prtf_form(const char **cptr, va_list *ap)
 {
-	int			rtn;
 	t_string	str;
 	t_flags		flgs;
 
-	rtn = 0;
 	ft_memset(&str, 0, sizeof(str));
 	ft_memset(&flgs, 0, sizeof(t_flags));
 	(*cptr)++;
 	while (1)
 	{
-		rtn = prtf_form_srch(**cptr, ap, &str);
-		if (rtn == 1)
+		if (prtf_form_srch(**cptr, ap, &str))
 			break ;
-		else if (rtn == 0)
-			rtn = prtf_flags(cptr, &str, &flgs);
-		if (rtn == 1)
-			(*cptr)++;
-		if (**cptr == '\0' || rtn == 0)
-			return (-1);
+		else
+			if (prtf_flags(cptr, &str, &flgs) == 0 || **cptr == '\0')
+				return (-1);
 	}
 	//if (prtf_unvaid_flgs(&str, &flgs)) //유효한 입력인지 확인 = 플래그 겹치는것 확인
 	//	return (-1);
@@ -80,9 +74,6 @@ int	prtf_form(const char **cptr, va_list *ap)
 	(*cptr)++;
 	return (str.s_len);
 }
-
-
-
 
 int	prtf_flags(const char **cptr, t_string *str, t_flags *flgs)
 {
@@ -97,30 +88,35 @@ int	prtf_flags(const char **cptr, t_string *str, t_flags *flgs)
 		flgs->sharp = 1;
 	else if (**cptr == '0')
 		flgs->zero = 1;
-	else if (ft_isdigit(**cptr))
+	else if (ft_isdigit(**cptr) || **cptr == '.')
 	{
-		flgs->width = 1;
-		prtf_save_num(&(flgs->len_width), cptr);
-		return (2);
-	}
-	else if (**cptr == '.')
-	{
-		flgs->dot = 1;
-		if ((*cptr)++ && ft_isdigit(**cptr))
-			prtf_save_num(&(flgs->len_dot), cptr);
-		return (2);
+		prtf_dot_width(flgs, **cptr, cptr);
+		return (1);
 	}
 	else
 		return (0);
+	(*cptr)++;
 	return (1);
 }
 
-int	prtf_save_num(size_t *dest, const char **cptr)
+void	prtf_dot_width(t_flags *flgs, char c, const char **cptr)
 {
-	int	i;
+	int		i;
+	size_t	*dest;
 
 	i = 0;
-	*dest = 0;
+	if (c == '.')
+	{
+		flgs->dot = 1;
+		dest = &(flgs->len_dot);
+		if ((*cptr)++ && !ft_isdigit(**cptr))
+			return ;
+	}
+	else
+	{
+		flgs->width = 1;
+		dest = &(flgs->len_width);
+	}
 	while (ft_isdigit((*cptr)[i]))
 	{
 		if (*dest)
@@ -129,5 +125,4 @@ int	prtf_save_num(size_t *dest, const char **cptr)
 		i++;
 	}
 	*cptr += i;
-	return (1);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_form_1.c                                        :+:      :+:    :+:   */
+/*   prtf_form_1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jiwolee <jiwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 17:39:11 by jiwolee           #+#    #+#             */
-/*   Updated: 2022/02/23 15:27:34 by jiwolee          ###   ########seoul.kr  */
+/*   Updated: 2022/02/23 17:00:16 by jiwolee          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	prtf_form_srch(char c, va_list *ap, t_string *str)
 	else if (c == 'u')
 		rtn = prtf_form_u(ap, str);
 	else if (c == 'x' || c == 'X')
-		rtn = prtf_form_xX(ap, str, c);
+		rtn = prtf_form_x(ap, str, c);
 	return (rtn);
 }
 
@@ -45,8 +45,9 @@ int	prtf_form_c(va_list *ap, t_string *str, char c)
 			str->s[0] = va_arg(*ap, int);
 		str->s[1] = '\0';
 		str->s_len += 1;
-		return (1);
 	}
+	if (str->s)
+		return (1);
 	return (0);
 }
 
