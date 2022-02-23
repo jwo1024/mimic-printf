@@ -6,7 +6,7 @@
 /*   By: jiwolee <jiwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 21:59:46 by jiwolee           #+#    #+#             */
-/*   Updated: 2022/01/21 23:25:02 by jiwolee          ###   ########.fr       */
+/*   Updated: 2022/02/22 21:47:11 by jiwolee          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 		while (isset(set, s1[bac]))
 			bac--;
 		str = ft_substr(s1, fro, bac - fro + 1);
-	}	
+	}
 	return (str);
 }
 

@@ -6,7 +6,7 @@
 #    By: jiwolee <jiwolee@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/17 17:39:05 by jiwolee           #+#    #+#              #
-#    Updated: 2022/02/17 21:57:04 by jiwolee          ###   ########seoul.kr   #
+#    Updated: 2022/02/23 15:44:12 by jiwolee          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,10 @@ NAME	= libftprintf.a
 
 LIB_DIR	= ./libft/
 LIB		= $(LIB_DIR)libft.a
-LIB_O 	= $(LIB_DIR)*.o
+LIB_O 	= $(LIB_DIR)*.o #와일드 카드 쓰지 x
 
-CC		= gcc
-CFLAG	= -Wall -Wextra -Werror
+CC		= cc #gcc -> cc
+CFLAGS	= -Wall -Wextra -Werror #cflag -> cflags
 
 AR		= ar
 ARFLAGS = rus
@@ -25,9 +25,9 @@ ARFLAGS = rus
 HEADER = ft_printf.h
 
 SRCS = ft_printf.c \
-		ft_form_1.c \
-		ft_form_2.c \
-		ft_conv_dec.c
+		prtf_form_1.c \
+		prtf_form_2.c \
+		prtf_apply_flgs.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -39,7 +39,7 @@ $(LIB) :
 	make all -C $(LIB_DIR)
 
 %.o : %.c
-	$(CC) $(CFLAG) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean :
 	rm -f $(OBJS) $(OBJS_BONUS)
