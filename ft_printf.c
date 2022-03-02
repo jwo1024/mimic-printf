@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jiwolee <jiwolee@student.42seoul.kr>       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/17 17:39:11 by jiwolee           #+#    #+#             */
-/*   Updated: 2022/02/23 17:32:32 by jiwolee          ###   ########seoul.kr  */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include    "ft_printf.h"
 
 int	ft_printf(const char *c, ...)
@@ -66,8 +54,7 @@ int	prtf_form(const char **cptr, va_list *ap)
 			if (prtf_flags(cptr, &str, &flgs) == 0 || **cptr == '\0')
 				return (-1);
 	}
-	//if (prtf_unvaid_flgs(&str, &flgs)) //유효한 입력인지 확인 = 플래그 겹치는것 확인
-	//	return (-1);
+	prtf_valid_flgs(&str, &flgs);
 	prtf_apply_flgs(&str, &flgs);
 	write(1, str.s, str.s_len);
 	free(str.s);

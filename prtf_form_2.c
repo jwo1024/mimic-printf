@@ -1,34 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   prtf_form_2.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jiwolee <jiwolee@student.42seoul.kr>       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/17 17:39:11 by jiwolee           #+#    #+#             */
-/*   Updated: 2022/02/23 16:04:20 by jiwolee          ###   ########seoul.kr  */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include	"ft_printf.h"
-
-int	prtf_form_p(va_list *ap, t_string *str)
-{
-	char	*tmp;
-	void	*a;
-
-	a = va_arg(*ap, void *);
-	tmp = prtf_conv_base((size_t)a, 16, "0123456789abcdef");
-	if (tmp)
-	{
-		str->s = ft_strjoin("0x", tmp);
-		free(tmp);
-	}
-	if ((str->s) == NULL)
-		return (0);
-	str->s_len += ft_strlen(str->s);
-	return (1);
-}
 
 int	prtf_form_u(va_list *ap, t_string *str)
 {

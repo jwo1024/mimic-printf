@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   prtf_form_1.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jiwolee <jiwolee@student.42seoul.kr>       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/17 17:39:11 by jiwolee           #+#    #+#             */
-/*   Updated: 2022/02/23 17:00:16 by jiwolee          ###   ########seoul.kr  */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include    "ft_printf.h"
 
 int	prtf_form_srch(char c, va_list *ap, t_string *str)
@@ -86,6 +74,24 @@ int	prtf_form_di(va_list *ap, t_string *str)
 	}
 	else
 		str->s = prtf_conv_base(n, 10, "0123456789");
+	if ((str->s) == NULL)
+		return (0);
+	str->s_len += ft_strlen(str->s);
+	return (1);
+}
+
+int	prtf_form_p(va_list *ap, t_string *str)
+{
+	char	*tmp;
+	void	*a;
+
+	a = va_arg(*ap, void *);
+	tmp = prtf_conv_base((size_t)a, 16, "0123456789abcdef");
+	if (tmp)
+	{
+		str->s = ft_strjoin("0x", tmp);
+		free(tmp);
+	}
 	if ((str->s) == NULL)
 		return (0);
 	str->s_len += ft_strlen(str->s);
