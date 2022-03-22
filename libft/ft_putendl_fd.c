@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiwolee <jiwolee@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jiwolee <jiwolee@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/19 21:59:02 by jiwolee           #+#    #+#             */
-/*   Updated: 2022/01/19 21:59:02 by jiwolee          ###   ########seoul.kr  */
+/*   Created: 2022/03/22 15:26:06 by jiwolee           #+#    #+#             */
+/*   Updated: 2022/03/22 15:26:08 by jiwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

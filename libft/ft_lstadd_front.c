@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiwolee <jiwolee@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jiwolee <jiwolee@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/19 21:58:41 by jiwolee           #+#    #+#             */
-/*   Updated: 2022/01/19 21:58:41 by jiwolee          ###   ########seoul.kr  */
+/*   Created: 2022/03/22 15:18:34 by jiwolee           #+#    #+#             */
+/*   Updated: 2022/03/22 15:18:37 by jiwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

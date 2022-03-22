@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jiwolee <jiwolee@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/03 14:41:44 by jiwolee           #+#    #+#             */
-/*   Updated: 2022/03/03 14:41:46 by jiwolee          ###   ########.fr       */
+/*   Created: 2022/03/22 14:37:33 by jiwolee           #+#    #+#             */
+/*   Updated: 2022/03/22 14:37:34 by jiwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,24 @@ int	prtf_apply_flgs(t_string *str, t_flags *flgs)
 
 int	prtf_valid_flgs(t_string *str, t_flags *flgs)
 {
-	if (str->specific == 's' || str->specific == 'p' || str->specific == 'c')
+	if (str->specific == 's' || str->specific == 'c' || str->specific == 'p')
 	{
 		flgs->plus = 0;
 		flgs->blank = 0;
 		flgs->sharp = 0;
+		flgs->zero = 0;
+		if (str->specific != 's')
+			flgs->dot = 0;
 	}
-	if (str->specific == '%')
+	else if (str->specific == 'x' || str->specific == 'X'
+		|| str->specific == 'u')
 	{
 		flgs->plus = 0;
 		flgs->blank = 0;
-		flgs->sharp = 0;
-		flgs->dot = 0;
 	}
-	if (flgs->sharp == 1 && str->s[0] == '0' && str->s_len == 1)
+	if (str->specific == 'u' || str->specific == 'd' || str->specific == 'i')
+		flgs->sharp = 0;
+	else if (flgs->sharp == 1 && str->s[0] == '0' && str->s_len == 1)
 		flgs->sharp = 0;
 	if (flgs->zero == 1 && (flgs->minus == 1 || flgs->dot == 1))
 		flgs->zero = 0;

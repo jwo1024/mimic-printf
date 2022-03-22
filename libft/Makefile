@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jiwolee <jiwolee@student.42seoul.kr>       +#+  +:+       +#+         #
+#    By: jiwolee <jiwolee@student.42seoul.k>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/01/19 21:52:27 by jiwolee           #+#    #+#              #
-#    Updated: 2022/01/22 02:07:09 by jiwolee          ###   ########.fr        #
+#    Created: 2022/03/22 15:27:03 by jiwolee           #+#    #+#              #
+#    Updated: 2022/03/22 15:27:07 by jiwolee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiwolee <jiwolee@student.42seoul.k>        +#+  +:+       +#+        */
+/*   By: jiwolee <jiwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/03 14:40:57 by jiwolee           #+#    #+#             */
-/*   Updated: 2022/03/03 14:40:59 by jiwolee          ###   ########.fr       */
+/*   Created: 2022/03/22 14:35:53 by jiwolee           #+#    #+#             */
+/*   Updated: 2022/03/22 14:58:32 by jiwolee          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include    "ft_printf.h"
+#include "ft_printf.h"
 
 int	ft_printf(const char *c, ...)
 {
