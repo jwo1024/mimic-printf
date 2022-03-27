@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prtf_form_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiwolee <jiwolee@student.42seoul.k>        +#+  +:+       +#+        */
+/*   By: jiwolee <jiwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 14:38:13 by jiwolee           #+#    #+#             */
-/*   Updated: 2022/03/22 14:38:19 by jiwolee          ###   ########.fr       */
+/*   Updated: 2022/03/28 02:21:37 by jiwolee          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,26 +70,27 @@ void	prtf_x_rmzero(t_string *str)
 
 char	*prtf_conv_base(size_t n, size_t base, char *idx)
 {
-	size_t	a;
-	size_t	l;
+	size_t	div;
+	size_t	i;
+	size_t	len;
 	char	*nbr;
 
-	l = 0;
-	a = n;
-	while (a || (l == 0 && n == 0))
+	len = 0;
+	div = n;
+	while (div || (len == 0 && n == 0))
 	{
-		a = a / base;
-		l++;
+		div = div / base;
+		len++;
 	}
-	nbr = (char *)malloc(sizeof(char) * (l + 1));
-	a = 0;
-	while (nbr && a < l)
+	nbr = (char *)malloc(sizeof(char) * (len + 1));
+	i = 0;
+	while (nbr && i < len)
 	{
-		nbr[l - a - 1] = idx[n % base];
+		nbr[len - i - 1] = idx[n % base];
 		n = n / base;
-		a++;
+		i++;
 	}
 	if (nbr)
-		nbr[a] = '\0';
+		nbr[i] = '\0';
 	return (nbr);
 }

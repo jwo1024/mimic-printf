@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiwolee <jiwolee@student.42seoul.k>        +#+  +:+       +#+        */
+/*   By: jiwolee <jiwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 14:37:15 by jiwolee           #+#    #+#             */
-/*   Updated: 2022/03/22 14:37:17 by jiwolee          ###   ########.fr       */
+/*   Updated: 2022/03/28 02:06:17 by jiwolee          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,6 @@ void	prtf_attach_front(t_string *str, char *attach);
 void	prtf_flg_dot(t_string *str, t_flags *flgs);
 void	prtf_flg_zero(t_string *str);
 void	prtf_flg_blank(t_string *str, t_flags *flgs);
-int		prtf_valid_flgs(t_string *str, t_flags *flgs);
+void	prtf_valid_flgs(t_string *str, t_flags *flgs);
 
 #endif

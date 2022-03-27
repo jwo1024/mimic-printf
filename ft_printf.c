@@ -6,7 +6,7 @@
 /*   By: jiwolee <jiwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 14:35:53 by jiwolee           #+#    #+#             */
-/*   Updated: 2022/03/22 14:58:32 by jiwolee          ###   ########seoul.kr  */
+/*   Updated: 2022/03/28 02:22:36 by jiwolee          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,14 @@ int	prtf_form(const char **cptr, va_list *ap)
 		if (prtf_form_srch(**cptr, ap, &str))
 			break ;
 		else
+		{
 			if (prtf_flags(cptr, &str, &flgs) == 0 || **cptr == '\0')
 				return (-1);
+		}
 	}
 	prtf_valid_flgs(&str, &flgs);
-	prtf_apply_flgs(&str, &flgs);
+	if (prtf_apply_flgs(&str, &flgs) == 0)
+		return (-1);
 	write(1, str.s, str.s_len);
 	free(str.s);
 	(*cptr)++;

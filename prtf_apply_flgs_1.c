@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prtf_apply_flgs_1.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiwolee <jiwolee@student.42seoul.k>        +#+  +:+       +#+        */
+/*   By: jiwolee <jiwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 14:37:33 by jiwolee           #+#    #+#             */
-/*   Updated: 2022/03/22 14:37:34 by jiwolee          ###   ########.fr       */
+/*   Updated: 2022/03/28 02:28:50 by jiwolee          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	prtf_apply_flgs(t_string *str, t_flags *flgs)
 	return (1);
 }
 
-int	prtf_valid_flgs(t_string *str, t_flags *flgs)
+void	prtf_valid_flgs(t_string *str, t_flags *flgs)
 {
 	if (str->specific == 's' || str->specific == 'c' || str->specific == 'p')
 	{
@@ -46,18 +46,18 @@ int	prtf_valid_flgs(t_string *str, t_flags *flgs)
 			flgs->dot = 0;
 	}
 	else if (str->specific == 'x' || str->specific == 'X'
-		|| str->specific == 'u')
+		|| str->specific == 'u' || str->specific == '%')
 	{
 		flgs->plus = 0;
 		flgs->blank = 0;
+		if (str->specific == '%')
+			flgs->dot = 0;
 	}
-	if (str->specific == 'u' || str->specific == 'd' || str->specific == 'i')
-		flgs->sharp = 0;
-	else if (flgs->sharp == 1 && str->s[0] == '0' && str->s_len == 1)
+	if ((str->specific == 'u' || str->specific == 'd' || str->specific == 'i')
+		|| (flgs->sharp == 1 && str->s[0] == '0' && str->s_len == 1))
 		flgs->sharp = 0;
 	if (flgs->zero == 1 && (flgs->minus == 1 || flgs->dot == 1))
 		flgs->zero = 0;
 	if (flgs->blank == 1 && flgs->plus == 1)
 		flgs->blank = 0;
-	return (0);
 }

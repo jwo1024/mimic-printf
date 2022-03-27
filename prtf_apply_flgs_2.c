@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prtf_apply_flgs_2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiwolee <jiwolee@student.42seoul.k>        +#+  +:+       +#+        */
+/*   By: jiwolee <jiwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 14:37:44 by jiwolee           #+#    #+#             */
-/*   Updated: 2022/03/22 14:37:49 by jiwolee          ###   ########.fr       */
+/*   Updated: 2022/03/28 01:47:52 by jiwolee          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void	prtf_flg_zero(t_string *str)
 		{
 			str->s[0] = '0';
 			str->s[1] = str->s[i + 1];
-			str->s[i] = '0';
 			str->s[i + 1] = '0';
 		}
 		i++;
